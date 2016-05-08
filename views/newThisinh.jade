@@ -1,0 +1,75 @@
+extends layout
+
+block content
+    .row
+        .col-md-3
+            br
+            p.lead Thông Tin Tuyển Sinh
+                |                 
+                .list-group
+                - if(user.privilege=='Admin'){
+                    a.list-group-item(href='/truong') Danh Sách Trường
+                    |                     
+                    a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+                    |                     
+                    a.list-group-item(href='/khoi') Danh Sách Khối Thi
+                    |                     
+                    a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+                    |                     
+                    a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+                    |                     
+                    a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+                    |                     
+                    a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+                    |                     
+                    a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+                    |                     
+                    a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+                - } else if (user.privilege=='Tuyensinh'){
+                    a.list-group-item(href='/truong') Danh Sách Trường
+                    |                     
+                    a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+                    |                     
+                    a.list-group-item(href='/khoi') Danh Sách Khối Thi
+                - } else{
+                    a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+                    |                     
+                    a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+                    |                     
+                    a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+                    |                     
+                    a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+                    |                     
+                    a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+                    |                     
+                    a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+                - }
+        .col-md-9
+            ul.errors  
+            br
+            h1 Tạo Mới Thí Sinh Tham gia Tuyển Sinh
+            if errors
+                    each error, i in errors
+                        li.alert.alert-danger #{error.msg}
+            form(method='post', action='/thisinh/new', enctype='multipart/form-data')
+                .form-group
+                    label ID
+                    input.form-control(name='id',type='text',placeholder='ID')
+                    .form-group
+                    label Tên Thí Sinh
+                    input.form-control(name='name',type='text',placeholder='Tên Thí Sinh')
+                    .form-group
+                    label Chứng Minh Nhân Dân
+                    input.form-control(name='cmnd',type='text',placeholder='Chứng Minh Nhân Dân')
+                    .form-group
+                    label Địa Chỉ
+                    input.form-control(name='address',type='text',placeholder='Địa Chỉ')
+                    .form-group
+                    label Nguyên Quán
+                    input.form-control(name='domicile',type='text',placeholder='Nguyên Quán')
+                    .form-group
+                    label Số Điện Thoại
+                    input.form-control(name='phone',type='text',placeholder='Số Điện Thoại') 
+                    label Mã THPT
+                    input.form-control(name='idTHPT',type='text',placeholder='Mã THPT') 
+                input.btn.btn-default(name='submit', type='submit', value='Tạo Mới')

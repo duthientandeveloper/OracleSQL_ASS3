@@ -1,0 +1,89 @@
+extends layout
+
+block content
+  .row
+    .col-md-3
+      br
+      p.lead Thông Tin Tuyển Sinh
+        |                 
+        .list-group
+        - if(user.privilege=='Admin'){
+          a.list-group-item(href='/truong') Danh Sách Trường
+          |                     
+          a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+          |                     
+          a.list-group-item(href='/khoi') Danh Sách Khối Thi
+          |                     
+          a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+          |                     
+          a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+          |                     
+          a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+          |                     
+          a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+          |                     
+          a.list-group-item.active(href='/timkiem') Tìm Kiếm Thí Sinh
+          |                     
+          a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+        - } else if (user.privilege=='Tuyensinh'){
+          a.list-group-item(href='/truong') Danh Sách Trường
+          |                     
+          a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+          |                     
+          a.list-group-item(href='/khoi') Danh Sách Khối Thi
+        - } else{
+          a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+          |                     
+          a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+          |                     
+          a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+          |                     
+          a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+          |                     
+          a.list-group-item.active(href='/timkiem') Tìm Kiếm Thí Sinh
+          |                     
+          a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+        - }
+    .col-md-9
+        br
+        h1 Tìm Kiếm Thí Sinh
+        form(method='post', action='/timkiem', enctype='multipart/form-data')
+            .form-group
+                label Họ và Tên Thí Sinh
+                input.form-control(name='name',type='text',placeholder='Tên Thí Sinh',value=''+(arr==undefined?'':name)) 
+            input.btn.btn-default(name='submit', type='submit', value='Tìm Kiếm') 
+        - if(arr!=undefined){
+            table.hyper(cellspacing='0', width='100%')
+                thead
+                    tr
+                    th ID
+                    | 
+                    th Mã Trường
+                    |                 
+                    th Mã Ngành
+                    |                 
+                    th Tên Khối
+                    |                 
+                    th Số Báo Danh
+                    |                 
+                    th Tổng Điểm
+                    |                 
+                    th STT
+                    |                 
+                    th Điểm Thi
+                    |                 
+                    th Điểm Phúc Khảo
+                - if (arr.length){
+                each item in arr
+                    tr
+                        td= item.id
+                        td= item.idSchool
+                        td= item.idBranch
+                        td= item.nameUnit
+                        td= item.idNum
+                        td= item.total
+                        td= item.stt
+                        td= item.sroce
+                        td= item.revisionSroce  
+                - }
+        - }

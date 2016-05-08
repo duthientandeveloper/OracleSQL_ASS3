@@ -1,0 +1,80 @@
+extends layout
+
+block content
+  .row
+    .col-md-3
+      br
+      p.lead Thông Tin Tuyển Sinh
+        |                 
+        .list-group
+        - if(user.privilege=='Admin'){
+          a.list-group-item(href='/truong') Danh Sách Trường
+          |                     
+          a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+          |                     
+          a.list-group-item(href='/khoi') Danh Sách Khối Thi
+          |                     
+          a.list-group-item.active(href='/thisinh') Danh Sách Thí Sinh
+          |                     
+          a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+          |                     
+          a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+          |                     
+          a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+          |                     
+          a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+          |                     
+          a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+        - } else if (user.privilege=='Tuyensinh'){
+          a.list-group-item(href='/truong') Danh Sách Trường
+          |                     
+          a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+          |                     
+          a.list-group-item(href='/khoi') Danh Sách Khối Thi
+        - } else{
+          a.list-group-item.active(href='/thisinh') Danh Sách Thí Sinh
+          |                     
+          a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+          |                     
+          a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+          |                     
+          a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+          |                     
+          a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+          |                     
+          a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+        - }
+    .col-md-9
+      br
+      h1 Thông Tin Thi Sinh Tham Gia Tuyển Sinh
+      table.hyper(cellspacing='0', width='100%')
+        thead
+            tr
+            th ID
+            |                 
+            th Họ Tên
+            |                 
+            th CMND
+            |                 
+            th Địa Chỉ
+            |                 
+            th Quê Quán
+            |                 
+            th Điện Thoại
+            |                 
+            th Mã THPT
+        - if (arr.length){
+        each item in arr
+            tr
+                td= item.id
+                td= item.name
+                td= item.cmnd
+                td= item.address
+                td= item.domicile
+                td= item.phone
+                td= item.idTHPT         
+        - }
+      br
+      a(href='/thisinh/new') New 
+        
+            

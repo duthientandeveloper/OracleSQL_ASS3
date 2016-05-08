@@ -1,0 +1,79 @@
+extends layout
+
+block content
+    .row
+        .col-md-3
+            br
+            p.lead Thông Tin Tuyển Sinh
+                |                 
+                .list-group
+                - if(user.privilege=='Admin'){
+                    a.list-group-item(href='/truong') Danh Sách Trường
+                    |                     
+                    a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+                    |                     
+                    a.list-group-item(href='/khoi') Danh Sách Khối Thi
+                    |                     
+                    a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+                    |                     
+                    a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+                    |                     
+                    a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+                    |                     
+                    a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+                    |                     
+                    a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+                    |                     
+                    a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+                - } else if (user.privilege=='Tuyensinh'){
+                    a.list-group-item(href='/truong') Danh Sách Trường
+                    |                     
+                    a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+                    |                     
+                    a.list-group-item(href='/khoi') Danh Sách Khối Thi
+                - } else{
+                    a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+                    |                     
+                    a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+                    |                     
+                    a.list-group-item(href='/tttuyensinh') Thông Tin Tuyen Sinh
+                    |                     
+                    a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+                    |                     
+                    a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+                    |                     
+                    a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+                - }
+        .col-md-9
+            ul.errors  
+            br
+            h1 Cập Nhật Danh Sách Kết Quả Thi
+            if errors
+                    each error, i in errors
+                        li.alert.alert-danger #{error.msg}
+            form(method='post', action='/ketquathi/update', enctype='multipart/form-data')
+                .form-group
+                    label ID
+                    input.form-control(name='id',type='text',placeholder='ID', readonly,value=''+(arr==undefined?'':arr.id) )
+                .form-group
+                    label Mã Trường
+                    input.form-control(name='idSchool',type='text',placeholder='Mã Trường', readonly,value=''+(arr==undefined?'':arr.idSchool) )
+                .form-group
+                    label Mã Ngành
+                    input.form-control(name='idBranch',type='text',placeholder='Mã Ngành', readonly,value=''+(arr==undefined?'':arr.idBranch))
+                .form-group
+                    label Tên Khối
+                    input.form-control(name='nameUnit',type='text',placeholder='Tên Khối', readonly,value=''+(arr==undefined?'':arr.nameUnit))
+                .form-group
+                    label Số Báo Danh
+                    input.form-control(name='idNum',type='text',placeholder='Số Báo Danh', readonly,value=''+(arr==undefined?'':arr.idNum))
+                .form-group
+                    label Số Thứ Tự
+                    input.form-control(name='stt',type='text',placeholder='Số Thứ Tự', readonly,value=''+(arr==undefined?'':arr.stt))
+                .form-group
+                    label Điểm Thi
+                    input.form-control(name='sroce',type='text',placeholder='Điểm Thi',value=''+(arr==undefined?'':arr.sroce))
+                .form-group 
+                    label Điểm Phúc Tra
+                    input.form-control(name='revisionSroce',type='text',placeholder='Điểm Phúc Tra',value=''+(arr==undefined?'':arr.revisionSroce))
+                input.btn.btn-default(name='submit', type='submit', value='Cập Nhật')

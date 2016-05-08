@@ -1,0 +1,86 @@
+extends layout
+
+block content
+  .row
+    .col-md-3
+      br
+      p.lead Thông Tin Tuyển Sinh
+        |                 
+        .list-group
+        - if(user.privilege=='Admin'){
+            a.list-group-item(href='/truong') Danh Sách Trường
+            |                     
+            a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+            |                     
+            a.list-group-item(href='/khoi') Danh Sách Khối Thi
+            |                     
+            a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+            |                     
+            a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+            |                     
+            a.list-group-item.active(href='/tttuyensinh') Thông Tin Tuyen Sinh
+            |                     
+            a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+            |                     
+            a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+            |                     
+            a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+        - } else if (user.privilege=='Tuyensinh'){
+            a.list-group-item(href='/truong') Danh Sách Trường
+            |                     
+            a.list-group-item(href='/nganh') Danh Sách Ngành Thi
+            |                     
+            a.list-group-item(href='/khoi') Danh Sách Khối Thi
+        - } else{
+            a.list-group-item(href='/thisinh') Danh Sách Thí Sinh
+            |                     
+            a.list-group-item(href='/hsthisinh') Danh Sách Hồ Sơ Thí Sinh
+            |                     
+            a.list-group-item.active(href='/tttuyensinh') Thông Tin Tuyen Sinh
+            |                     
+            a.list-group-item(href='/ketquathi') Danh Sách Kết Quả Thi
+            |                     
+            a.list-group-item(href='/timkiem') Tìm Kiếm Thí Sinh
+            |                     
+            a.list-group-item(href='/dsthido') Danh Sách Thi Đỗ Đại Học
+        - }
+    .col-md-9
+      br
+      h1 Thông Tin Tuyển Sinh
+      table.hyper(cellspacing='0', width='100%')
+        thead
+            tr
+            th Mã Trường
+            |                 
+            th Mã Ngành
+            |                 
+            th Tên Khối
+            |                 
+            th Tỉ Lệ Chọi
+            |                 
+            th Điểm Chuẩn Năm Ngoái
+            |                 
+            th Tiêu Chí
+            |                 
+            th Điểm Nguyện Vọng 1
+            |                 
+            th Điểm Nguyện Vọng 2
+            |                 
+            th Điểm Nguyện Vọng 3
+        - if (arr.length){
+        each item in arr
+            tr
+                td= item.idSchool
+                td= item.id
+                td= item.nameUnit
+                td= item.ratio
+                td= item.srocelater
+                td= item.target
+                td= item.aspiration1
+                td= item.aspiration2
+                td= item.aspiration3
+                td 
+                    a(href='/tttuyensinh/update?idSchool='+item.idSchool+'&id='+item.id+'&nameUnit='+item.nameUnit) Update         
+        - } 
+        
+            
